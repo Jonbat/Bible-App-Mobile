@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'services/verseAPI.dart';
 
 void main() => runApp(MyApp());
 
@@ -55,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+    getVersions();
   }
 
   @override
