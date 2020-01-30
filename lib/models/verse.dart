@@ -1,5 +1,3 @@
-import 'package:http/htpp.dart' as http;
-
 class VerseResponse {
   final Verse prev, curr, next;
 
@@ -24,5 +22,4 @@ class Verse {
       chapter = json['chapter'],
       verse = json['verse'],
       text = json['text'];
-  }
 }
