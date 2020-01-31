@@ -20,6 +20,26 @@ class VerseAPI {
     }
   }
 
+   //String selectUrl = "http://rordonez.pythonanywhere.com/bible/api/v1.0/version:";
+
+    Future<List<String>> getBooks(String version) async {
+    // make the request
+
+    final response = await http.get(baseUrl + version + '/books');
+
+    if (response.statusCode == 200) {
+      // If server returns an OK response, parse the JSON.
+      List<dynamic> something =  json.decode(response.body);
+      List<String> result = something.map((element) => element[1].toString()).toList();
+      return result;
+    } else {
+      // If that response was not OK, throw an error.
+      throw Exception('Failed to load post');
+    }
+  }
+
+
+
   Future<VerseResponse> getVerses(String version, String book, int chapter, int verse) async {
     // make the request
 
