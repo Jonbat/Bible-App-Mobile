@@ -20,10 +20,8 @@ class VerseAPI {
     }
   }
 
-   //String selectUrl = "http://rordonez.pythonanywhere.com/bible/api/v1.0/version:";
-
-    Future<List<String>> getBooks(String version) async {
-    // make the request
+  Future<List<String>> getBooks(String version) async {
+  // make the request
 
     final response = await http.get(baseUrl + version + '/books');
 
@@ -38,9 +36,39 @@ class VerseAPI {
     }
   }
 
+  Future<int> getChapters(String version, String book) async {
+  // make the request
+
+    final response = await http.get(baseUrl + version + '/' + book + '/chapters');
+
+      if (response.statusCode == 200) {
+      // If server returns an OK response, parse the JSON.
+      int chapter = json.decode(response.body);
+      return chapter;
+    } else {
+      // If that response was not OK, throw an error.
+      throw Exception('Failed to load post');
+    }
+  }
+
+  Future<int> getVerses(String version, String book, int chapter) async {
+  // make request
+
+    final response = await http.get(baseUrl + version + '/' + book + '/' + chapter.toString() + '/verses');
+
+      if (response.statusCode == 200) {
+      // If server returns an OK response, parse the JSON.
+      int verses = json.decode(response.body);
+      return verses;
+    } else {
+      // If that response was not OK, throw an error.
+      throw Exception('Failed to load post');
+    }
+  }
 
 
-  Future<VerseResponse> getVerses(String version, String book, int chapter, int verse) async {
+
+  Future<VerseResponse> getVerseNum(String version, String book, int chapter, int verse) async {
     // make the request
 
     final response = await http.get(baseUrl + version + '/' + book + '/' + chapter.toString() + '/' + verse.toString());

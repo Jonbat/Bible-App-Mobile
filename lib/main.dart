@@ -4,15 +4,29 @@ import 'services/verseAPI.dart';
 import 'models/verse.dart';
 
 Future<void> main() async {
-  // final VerseAPI verseAPI = VerseAPI();
+  final VerseAPI verseAPI = VerseAPI();
   runApp(MyApp());
 
   // comment out to test api calls
-  // VerseResponse verseResponse = await verseAPI.getVerses('ASV', 'Genesis', 3, 1);
+  // VerseResponse verseResponse = await verseAPI.getVerseNum('ASV', 'Genesis', 3, 1);
   // print(verseResponse.prev);
 
   // List<String> versions = await verseAPI.getVersions();
   // print(versions.first);
+
+  // List<String> books = await verseAPI.getBooks('ASV');
+  // print(books);
+
+  //int chapters = await verseAPI.getChapters('ASV', 'Romans');
+  //print(chapters);
+
+  //int verses = await verseAPI.getVerses('ASV', 'Romans', 3);
+  //print(verses);
+
+
+
+
+
 } 
 
 class MyApp extends StatelessWidget {
@@ -85,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text('Secect a verse'),
+        title: Text('Select a verse'),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
