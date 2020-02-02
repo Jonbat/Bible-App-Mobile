@@ -4,18 +4,16 @@ import 'services/verseAPI.dart';
 import 'models/verse.dart';
 
 Future<void> main() async {
-  final VerseAPI verseAPI = VerseAPI();
+  //final VerseAPI verseAPI = VerseAPI();
   runApp(MyApp());
 
-  // comment out to test api calls
-  // VerseResponse verseResponse = await verseAPI.getVerseNum('ASV', 'Genesis', 3, 1);
-  // print(verseResponse.prev);
+  //comment out to test api calls Seperated
 
-  // List<String> versions = await verseAPI.getVersions();
-  // print(versions.first);
+  //List<String> versions = await verseAPI.getVersions();
+  //print(versions[2]);
 
-  // List<String> books = await verseAPI.getBooks('ASV');
-  // print(books);
+  //List<String> books = await verseAPI.getBooks('ASV');
+  //print(books[3]);
 
   //int chapters = await verseAPI.getChapters('ASV', 'Romans');
   //print(chapters);
@@ -23,9 +21,27 @@ Future<void> main() async {
   //int verses = await verseAPI.getVerses('ASV', 'Romans', 3);
   //print(verses);
 
+  //VerseResponse verseResponse = await verseAPI.getVerseNum('ASV', 'Genesis', 3, 2);
+  //print(verseResponse.curr);
 
+  //Intregration of API calls together
 
+  //List<String> versions = await verseAPI.getVersions();
+  //print(versions[0]);
+  //String versionselect = versions[0];
 
+  //List<String> books = await verseAPI.getBooks(versionselect);
+  //print(books[2]);
+  //String bookselect = books[2];
+
+  //int chapters = await verseAPI.getChapters(versionselect, bookselect);
+  //print(chapters);
+
+  //int verses = await verseAPI.getVerses(versionselect, bookselect, 3);
+  //print(verses);
+
+  //VerseResponse verseResponse = await verseAPI.getVerseNum(versionselect, bookselect, 3, 5);
+  //print(verseResponse);
 
 } 
 
