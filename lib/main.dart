@@ -1,7 +1,7 @@
 import 'package:bible_app_mobile/pages/verseDisplay.dart';
 import 'package:flutter/material.dart';
 import 'services/verseAPI.dart';
-// import 'models/verse.dart';
+
 
 Future<void> main() async {
   runApp(MyApp());
@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
     
     return MaterialApp(
       title: 'Flutter Bible App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.deepPurple
       ),
       home: MyHomePage(title: 'Flutter Bible App'),
     );
