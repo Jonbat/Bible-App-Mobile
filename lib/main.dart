@@ -1,7 +1,7 @@
 import 'package:bible_app_mobile/pages/verseDisplay.dart';
 import 'package:flutter/material.dart';
 import 'services/verseAPI.dart';
-
+// import 'models/verse.dart';
 
 Future<void> main() async {
   runApp(MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Bible App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple
+        primarySwatch: Colors.deepPurple,
       ),
       home: MyHomePage(title: 'Flutter Bible App'),
     );
@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text('Select a verse'),
+        title: Text('Verse Selection'),
         centerTitle: true,
       ),
       body: Center(
@@ -136,9 +136,19 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
           // Version Row
-          Text("Please Reselect Version On intital Load"),
+          //Text("Please Reselect Version On intital Load"),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            Text("Version: "),
+            Text("Version: ",
+            
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.purple[800]
+              )
+
+            ),
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[          
             FutureBuilder<List<String>>(
               future: widget.versions, // a previously-obtained Future<String> or null
               builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
@@ -150,7 +160,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   items: snapshot.data.map((String value) {
                     return new DropdownMenuItem<String>(
                       value: value,
-                      child: new Text(value),
+                      child: new Text(value,
+                        textAlign: TextAlign.center,
+                      
+                      ),
                     );
                   }).toList(),
                   onChanged: (value) {
@@ -173,7 +186,18 @@ class _MyHomePageState extends State<MyHomePage> {
           ]),
           // Book Row
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            Text("Book: "),
+            Text("Book: ",
+            
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.purple[800]
+                )
+            
+            ),
+          ]),
+
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[          
             FutureBuilder<List<String>>(
               future: widget.books, // a previously-obtained Future<String> or null
               builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
@@ -184,8 +208,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   value: widget.bookselect,
                   items: snapshot.data.map((String value) {
                     return new DropdownMenuItem<String>(
+
                       value: value,
-                      child: new Text(value, textAlign: TextAlign.center),
+                      child: new Text(value),
+                      
+/* Centers the text but is not completely centered on page
+                      value: value,
+                      child: Container(child: 
+                      Text(value),
+                      width: 160,
+                      alignment: Alignment.center,
+                      ),
+*/
                     );
                   }).toList(),
                   onChanged: (value) {
@@ -208,7 +242,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ]),
           // Chapter Row
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            Text("Chapter: "),
+            Text("Chapter: ",
+
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.purple[800]
+              ),
+            ),
+          ]),
+
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             FutureBuilder<List<int>>(
               future: widget.chapters, // a previously-obtained Future<String> or null
               builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
@@ -243,7 +287,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ]),
           // Verse Row
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            Text("Verse: "),
+            Text("Verse: ",
+
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20.0,
+              color: Colors.purple[800]
+              )
+            ),
+          ]),
+
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             FutureBuilder<List<int>>(
               future: widget.verses, // a previously-obtained Future<String> or null
               builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
@@ -276,7 +330,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ), 
           ]),
-
+/* Original Verse Selection Button
           RaisedButton(
             child: Text('Open Verse'),
             textColor: Colors.white,
@@ -287,8 +341,37 @@ class _MyHomePageState extends State<MyHomePage> {
                 MaterialPageRoute(builder: (context) => VerseDisplay(widget.versionselect, widget.bookselect, widget.chapterselect, widget.verseselect))
               );
             },
-          )
+          ),
+          */
+// Used this to match buttons on Verse View
+          ButtonTheme(
+                minWidth: 160.0,
+                colorScheme: ColorScheme.dark(),
+                // To change to iOS, replace 'RaisedButton' with ;CupertinoButton;
+                // and import 'package:flutter/cupertino.dart';
+                child: RaisedButton(
+                  child: Text('Find Verse'),
+                  onPressed: () {
+
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => VerseDisplay(widget.versionselect, widget.bookselect, widget.chapterselect, widget.verseselect))
+              );
+
+                  },
+                ),
+              ),
+              
+          Text("Please reselect version on intital load",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 15.0,
+              color: Colors.deepOrangeAccent[700]
+              )
+          ),
+
         ],)
+        
       ), 
     );
   }
