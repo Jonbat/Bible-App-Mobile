@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     
     return MaterialApp(
       title: 'Flutter Bible App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
@@ -131,7 +132,9 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
       body: Center(
-        child: Column(children: <Widget>[
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
           // Version Row
           Text("Please Reselect Version On intital Load"),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
