@@ -144,9 +144,10 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('Open Verse'),
               onPressed: () {
                 Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => VerseDisplay())
-                );
+                  context,
+                  // pass the user selected version, book, chapter, and verse to the VerseDisplay
+                  MaterialPageRoute(builder: (context) => VerseDisplay('ASV', 'Ge', 1, 2))
+                ); 
               },
             )
           ],
