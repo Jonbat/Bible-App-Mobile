@@ -4,8 +4,10 @@ class VerseResponse {
   VerseResponse({this.prev, this.curr, this.next});
 
   VerseResponse.fromJson(Map<String, dynamic> json)
+  // Helps with Edge Case for Start of Bible
     : prev = (json['prev'] != null) ? Verse.fromJson(json['prev']) : null,
       curr = Verse.fromJson(json['curr']),
+  // Helps with Edge Case for End of Bible
       next = (json['next'] != null) ? Verse.fromJson(json['next']) : null;
 }
 
