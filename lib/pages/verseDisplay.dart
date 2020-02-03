@@ -24,7 +24,9 @@ class VerseDisplayState extends State<VerseDisplay> {
     final selectedVerse = VerseAPI().getVerseNum(version, book, chapter, verse);
     selectedVerse.then((response) {
       setState(() {
+        
         changeVerse(response);
+        this._progressBarActive = false;
       }); 
     });
   }
@@ -49,6 +51,7 @@ class VerseDisplayState extends State<VerseDisplay> {
       previousVerse.then((response) {
         setState(() {
           changeVerse(response);
+          this._progressBarActive = false;
         }); 
       });
     }
@@ -63,6 +66,7 @@ class VerseDisplayState extends State<VerseDisplay> {
       nextVerse.then((response) {
         setState(() {
           changeVerse(response);
+          this._progressBarActive = false;
         }); 
       });
     }
@@ -102,6 +106,68 @@ class VerseDisplayState extends State<VerseDisplay> {
     );
   }
 
+  bool _progressBarActive = true;
+
+  Widget getBody() {
+    if (_progressBarActive) {
+      return 
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                Text("Loading verses"),
+              ],
+            ),
+          ),
+        );
+    } else {
+      return 
+        Column(
+          children: <Widget>[
+            Column(
+              children: verses.map((verse) => verseTemplate(verse)).toList(),
+            ),   
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ButtonTheme(
+                  minWidth: 160.0,
+                  colorScheme: ColorScheme.dark(),
+                  // To change to iOS, replace 'RaisedButton' with ;CupertinoButton;
+                  // and import 'package:flutter/cupertino.dart';
+                  child: RaisedButton(
+                    child: Text('Previous'),
+                    onPressed: () {
+                      setState(() {
+                        this._progressBarActive = true;
+                      });
+                      displayPreviousVerse();
+                    },
+                  ),
+                ),
+                SizedBox(width: 12.0),
+                ButtonTheme(
+                  minWidth: 160.0,
+                  colorScheme: ColorScheme.dark(),
+                  child: RaisedButton(
+                    child: Text('Next'),
+                    onPressed: () {
+                      setState(() {
+                        this._progressBarActive = true;
+                      });
+                      displayNextVerse();              
+                    },
+                  ),
+                ),
+              ],
+            )
+          ],
+        );
+    }
+  }
   @override
   Widget build (BuildContext ctxt) {
     return new Scaffold(
@@ -115,44 +181,7 @@ class VerseDisplayState extends State<VerseDisplay> {
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
-      body: Column(
-        
-        children: <Widget>[
-          Column(
-            children: verses.map((verse) => verseTemplate(verse)).toList(),
-          ),   
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ButtonTheme(
-                minWidth: 160.0,
-                colorScheme: ColorScheme.dark(),
-                // To change to iOS, replace 'RaisedButton' with ;CupertinoButton;
-                // and import 'package:flutter/cupertino.dart';
-                child: RaisedButton(
-                  child: Text('Previous'),
-                  onPressed: () {
-                    displayPreviousVerse();
-                  },
-                ),
-              ),
-              SizedBox(width: 12.0),
-              ButtonTheme(
-                minWidth: 160.0,
-                colorScheme: ColorScheme.dark(),
-                child: RaisedButton(
-                  child: Text('Next'),
-                  onPressed: () {
-                    displayNextVerse();              
-                  },
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-      
-      
+      body: getBody()
     );
   }
 }
