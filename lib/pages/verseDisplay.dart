@@ -30,16 +30,6 @@ class VerseDisplayState extends State<VerseDisplay> {
   }
   
   List<Verse> verses = [];
-  // [0] : previous verse
-  // [1] : current verse
-  // [2] : next verse
-  /* // Example format:
-  List<Verse> verses = [
-    Verse(book: "Ge", chapter: 1, verse: 28, text: "In the beginning God created the heavens and the earth."),
-    Verse(book: "Ge", chapter: 1, verse: 29, text: "And the earth was waste and void; and darkness was upon the face of the deep: and the Spirit of God moved upon the face of the waters."),
-    Verse(book: "Ge", chapter: 1, verse: 30, text: "And God said, Let there be light: and there was light.")
-  ];
-  */
 
   // change verses to display when next or previous button is pressed
   void changeVerse(VerseResponse response) {
@@ -167,4 +157,3 @@ class VerseDisplayState extends State<VerseDisplay> {
   }
 }
 
-//Text('${verse.book} ${verse.chapter} ${verse.verse} - ${verse.text}')

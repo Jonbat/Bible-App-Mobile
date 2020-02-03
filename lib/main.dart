@@ -1,53 +1,10 @@
 import 'package:bible_app_mobile/pages/verseDisplay.dart';
 import 'package:flutter/material.dart';
 import 'services/verseAPI.dart';
-import 'models/verse.dart';
-
-Future<String> _calculation = Future<String>.delayed(
-  Duration(seconds: 2),
-  () => 'Data Loaded',
-);
+// import 'models/verse.dart';
 
 Future<void> main() async {
-  // final VerseAPI verseAPI = VerseAPI();
   runApp(MyApp());
-
-  //comment out to test api calls Seperated
-
-  //List<String> versions = await verseAPI.getVersions();
-  //print(versions[2]);
-
-  //List<String> books = await verseAPI.getBooks('ASV');
-  //print(books[3]);
-
-  // List<int> chapters = await verseAPI.getChapters('ASV', 'Romans');
-  // print(chapters);
-
-  //int verses = await verseAPI.getVerses('ASV', 'Romans', 3);
-  //print(verses);
-
-  // VerseResponse verseResponse = await verseAPI.getVerseNum('ASV', 'Genesis', 3, 2);
-  // print(verseResponse.curr);
-
-  //Intregration of API calls together
-
-  //List<String> versions = await verseAPI.getVersions();
-  //print(versions[0]);
-  //String versionselect = versions[0];
-
-  //List<String> books = await verseAPI.getBooks(versionselect);
-  //print(books[2]);
-  //String bookselect = books[2];
-
-  // int chapters = await verseAPI.getChapters(versionselect, bookselect);
-  //print(chapters);
-
-  //int verses = await verseAPI.getVerses(versionselect, bookselect, 3);
-  //print(verses);
-
-  //VerseResponse verseResponse = await verseAPI.getVerseNum(versionselect, bookselect, 3, 5);
-  //print(verseResponse);
-
 } 
 
 class MyApp extends StatelessWidget {
@@ -86,24 +43,11 @@ class MyHomePage extends StatefulWidget {
   Future<List<String>> books;
   Future<List<int>> chapters;
   Future<List<int>> verses;
-  Future<VerseResponse> verseResponse;
-  // List<String> versions; 
-  // List<String> books; // = await verseAPI.getBooks('ASV');
-  // List<int> chapters;// = await verseAPI.getChapters('ASV', 'Romans');
-  // List<int> verses;// = await verseAPI.getVerses('ASV', 'Romans', 3);
-  String versionselect;// = versions[0];
-  String bookselect;// = books[2];
+ 
+  String versionselect;
+  String bookselect;
   int chapterselect;
   int verseselect;
-
-  // int chapters = await verseAPI.getChapters(versionselect, bookselect);
-  //print(chapters);
-
-  //int verses = await verseAPI.getVerses(versionselect, bookselect, 3);
-  //print(verses);
-
-  //VerseResponse verseResponse = await verseAPI.getVerseNum(versionselect, bookselect, 3, 5);
-  //print(verseResponse);
 
   final String title;
 
@@ -114,31 +58,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   @override void initState() {
-    // TODO: implement initState
-
-    // Future test() async{
-    //   widget.versions = await widget.verseAPI.getVersions();
-
-    //   widget.versionselect = widget.versions[0];
-
-    //   widget.books = await widget.verseAPI.getBooks(widget.versionselect);
-
-    //   widget.bookselect = widget.books[0];
-
-    //   widget.chapters = await widget.verseAPI.getChapters(widget.versionselect, widget.bookselect);
-
-    //   widget.chapterselect = widget.chapters[0];
-
-    //   widget.verses = await widget.verseAPI.getVerses(widget.versionselect, widget.bookselect, widget.chapterselect);
-
-    //   widget.verseselect = widget.verses[0];
-
-    //   versionChanged(widget.versionselect);
-
-    //   print("Ver: ${widget.versionselect}, Book: ${widget.bookselect}, Ch: ${widget.chapterselect}, V: ${widget.verseselect}");
-    // };
-
-    // test();
 
     widget.versions = widget.verseAPI.getVersions();
     widget.versions.then( (versions){
@@ -155,8 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
           widget.verses = widget.verseAPI.getVerses(widget.versionselect, widget.bookselect, widget.chapterselect);
           widget.verses.then( (verses) {
             widget.verseselect = verses[0];
-            
-            widget.verseResponse = widget.verseAPI.getVerseNum(widget.versionselect, widget.bookselect, widget.chapterselect, widget.verseselect);
 
           });
         });
@@ -204,7 +121,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void verseChanged(verse) {
     setState(() {
       widget.verseselect = int.parse(verse);
-      widget.verseResponse = widget.verseAPI.getVerseNum(widget.versionselect, widget.bookselect, widget.chapterselect, widget.verseselect);
     });
   }
 
@@ -315,7 +231,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   onChanged: (value) {
 
                       print("User selected ${value}");
-                      // ADD : TODO
                       chapterChanged(value);
 
                     },
@@ -351,7 +266,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   onChanged: (value) {
 
                       print("User selected ${value}");
-                      // ADD : TODO
                       verseChanged(value);
 
                     },
@@ -367,27 +281,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ), 
           ]),
-          // Show the actual verse Row
-          // Row(children: <Widget>[
-          //   Text("Text: "),
-          //   FutureBuilder<VerseResponse>(
-          //     future: widget.verseResponse, // a previously-obtained Future<String> or null
-          //     builder: (BuildContext context, AsyncSnapshot<VerseResponse> snapshot) {
-          //       var txtVerse;
-
-          //       if (snapshot.hasData) {
-          //         txtVerse = Text(snapshot.data.curr.text);
-                  
-          //       } else if (snapshot.hasError) {
-          //         txtVerse = Text("Error");
-          //       } else {
-          //         txtVerse = Text("Populating");
-          //       }
-                
-          //       return txtVerse;
-          //     },
-          //   ), 
-          // ]),
 
           RaisedButton(
             child: Text('Open Verse'),
