@@ -102,6 +102,7 @@ class VerseDisplayState extends State<VerseDisplay> {
               verse.text,
               style: TextStyle(
                 fontSize: 14.0,
+                // Renderflex for verses that are too long?
                 color: Colors.grey[700],
               ),
             ),
@@ -136,23 +137,23 @@ class VerseDisplayState extends State<VerseDisplay> {
               ButtonTheme(
                 minWidth: 160.0,
                 colorScheme: ColorScheme.dark(),
+                // To change to iOS, replace 'RaisedButton' with ;CupertinoButton;
+                // and import 'package:flutter/cupertino.dart';
                 child: RaisedButton(
                   child: Text('Previous'),
                   onPressed: () {
-                    displayPreviousVerse();     
+                    displayPreviousVerse();
                   },
                 ),
               ),
               SizedBox(width: 12.0),
-              // Renderflex for verses that are too long?
               ButtonTheme(
                 minWidth: 160.0,
                 colorScheme: ColorScheme.dark(),
                 child: RaisedButton(
                   child: Text('Next'),
                   onPressed: () {
-                    displayNextVerse();
-                    
+                    displayNextVerse();              
                   },
                 ),
               ),
