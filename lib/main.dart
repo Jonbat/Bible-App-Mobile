@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
     
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -70,7 +71,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.deepPurple
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -221,6 +222,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text('Select a verse'),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(children: <Widget>[
@@ -391,6 +393,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
           RaisedButton(
             child: Text('Open Verse'),
+            textColor: Colors.white,
+            color: Colors.deepPurple[200],
             onPressed: () {
               Navigator.push(
                 context, 
