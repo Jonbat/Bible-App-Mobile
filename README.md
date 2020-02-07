@@ -1,5 +1,5 @@
 <p align="center">
- <img src="bibleDemo.gif" width="500">
+ <img src="bibleDemo.gif" width="350">
 </p>
 
 # Bible App Mobile
